@@ -32,6 +32,8 @@ import sample.lab3.KrylovMethodDisplayer;
 import sample.lab3.KrylovMethodSolver;
 import sample.lab3.KrylovMethodSolverVector;
 import sample.lab3.KrylovMethodSolverVectorDisplayer;
+import sample.lab4.GaussianInterpolateMethodSolver;
+import sample.lab4.InterpolateMethodDisplayer;
 
 public class Controller {
 
@@ -75,6 +77,43 @@ public class Controller {
     public TextField lab3A32;
     public TextField lab3A33;
     public RadioButton Lab3Mathod2;
+    public TextField lab4X1;
+    public TextField lab4X3;
+    public TextField lab4X4;
+    public TextField lab4X5;
+    public TextField lab4X2;
+    public TextField lab4Y1;
+    public TextField lab4Y2;
+    public TextField lab4Y3;
+    public TextField lab4Y4;
+    public TextField lab4Y5;
+    public TextField lab4ResultCoefPower0;
+    public TextField lab4ResultCoefPower1;
+    public TextField lab4ResultCoefPower2;
+    public TextField lab4ResultCoefPower3;
+    public TextField lab4X1TextField;
+    public TextField lab4Y1TextField;
+    public TextField lab4Tria_2Y1TextField;
+    public TextField lab4Tria_1Y1TextField;
+    public TextField lab4Tria_3Y1TextField;
+    public TextField lab4Tria_4Y1TextField;
+    public TextField lab4X2TextField;
+    public TextField lab4X3TextField;
+    public TextField lab4X4TextField;
+    public TextField lab4Y2TextField;
+    public TextField lab4Y3TextField;
+    public TextField lab4Tria_1Y2TextField;
+    public TextField lab4Tria_2Y2TextField;
+    public TextField lab4Tria_3Y2TextField;
+    public TextField lab4Y4TextField;
+    public TextField lab4Tria_1Y3TextField;
+    public TextField lab4Tria_2Y3TextField;
+    public TextField lab4X5TextField;
+    public TextField lab4Y5TextField;
+    public TextField lab4Tria_1Y4TextField;
+    public Button lab4Solve;
+
+
     double ArrayA[] = new double[variables * variables]; // Array of input data of the coefficients
     double ArrayD[] = new double[variables]; // Array of input data
 
@@ -396,8 +435,6 @@ public class Controller {
         FaddeevLeVerrier faddeevLeVerrier = new FaddeevLeVerrier(matrixA);
         faddeevLeVerrier.solve(displayer);
         if (Lab3Mathod2.isSelected()) {
-
-
             displayers.add(displayer);
         } else {
 
@@ -442,5 +479,66 @@ public class Controller {
         matrixA.add(Double.valueOf(lab3A32.getText()));
         matrixA.add(Double.valueOf(lab3A33.getText()));
         return matrixA;
+    }
+
+    private double[] getXValuesOfTableInputLab4(){
+        return getInitialValues(lab4X1, lab4X2, lab4X3, lab4X4, lab4X5);
+    }
+
+    private double[] getYValuesOfTableInputLab4(){
+        return getInitialValues(lab4Y1, lab4Y2, lab4Y3, lab4Y4,lab4Y5);
+    }
+
+    private double[] getInitialValues(TextField lab41, TextField lab42, TextField lab43,
+        TextField lab44, TextField lab45) {
+        double[] initialY = new double[5];
+        initialY[0] = Double.parseDouble(lab41.getText());
+        initialY[1] = Double.parseDouble(lab42.getText());
+        initialY[2] = Double.parseDouble(lab43.getText());
+        initialY[3] = Double.parseDouble(lab44.getText());
+        initialY[4] = Double.parseDouble(lab45.getText());
+        return initialY;
+    }
+
+    private void setTableViewLab4(double[][] substractionYValuesTable, double[] initialX){
+        lab4X1TextField.setText(String.valueOf(initialX[0]));
+        lab4X2TextField.setText(String.valueOf(initialX[1]));
+        lab4X3TextField.setText(String.valueOf(initialX[2]));
+        lab4X4TextField.setText(String.valueOf(initialX[3]));
+        lab4X5TextField.setText(String.valueOf(initialX[4]));
+        lab4Y1TextField.setText(String.valueOf(substractionYValuesTable[0][0]));
+        lab4Y2TextField.setText(String.valueOf(substractionYValuesTable[0][1]));
+        lab4Y3TextField.setText(String.valueOf(substractionYValuesTable[0][2]));
+        lab4Y4TextField.setText(String.valueOf(substractionYValuesTable[0][3]));
+        lab4Y5TextField.setText(String.valueOf(substractionYValuesTable[0][4]));
+        lab4Tria_1Y1TextField.setText(String.valueOf(substractionYValuesTable[1][0]));
+        lab4Tria_1Y2TextField.setText(String.valueOf(substractionYValuesTable[1][1]));
+        lab4Tria_1Y3TextField.setText(String.valueOf(substractionYValuesTable[1][2]));
+        lab4Tria_1Y4TextField.setText(String.valueOf(substractionYValuesTable[1][3]));
+        lab4Tria_2Y1TextField.setText(String.valueOf(substractionYValuesTable[2][0]));
+        lab4Tria_2Y2TextField.setText(String.valueOf(substractionYValuesTable[2][1]));
+        lab4Tria_2Y3TextField.setText(String.valueOf(substractionYValuesTable[2][2]));
+        lab4Tria_3Y1TextField.setText(String.valueOf(substractionYValuesTable[3][0]));
+        lab4Tria_3Y2TextField.setText(String.valueOf(substractionYValuesTable[3][1]));
+        lab4Tria_4Y1TextField.setText(String.valueOf(substractionYValuesTable[4][0]));
+    }
+
+    private void setCoefficientsLab4( List<Double> coefficientsLab4){
+       lab4ResultCoefPower0.setText(String.valueOf(coefficientsLab4.get(0)));
+        lab4ResultCoefPower1.setText(String.valueOf(coefficientsLab4.get(1)));
+        lab4ResultCoefPower2.setText(String.valueOf(coefficientsLab4.get(2)));
+        lab4ResultCoefPower3.setText(String.valueOf(coefficientsLab4.get(3)));
+    }
+
+    @FXML
+    public void calculateInterpolationCoefficient(ActionEvent actionEvent) {
+        GaussianInterpolateMethodSolver solver =
+            new GaussianInterpolateMethodSolver(getXValuesOfTableInputLab4(),getYValuesOfTableInputLab4());
+        InterpolateMethodDisplayer displayer = new InterpolateMethodDisplayer(solver);
+        List<Double> coefficientsOfPolinomByOrder = displayer.getCoefficientsOfPolinomByOrder();
+        double[][] substractionYValuesTable = displayer.getSubstractionYValuesTable();
+        setTableViewLab4(substractionYValuesTable,getXValuesOfTableInputLab4());
+        setCoefficientsLab4(coefficientsOfPolinomByOrder);
+
     }
 }
