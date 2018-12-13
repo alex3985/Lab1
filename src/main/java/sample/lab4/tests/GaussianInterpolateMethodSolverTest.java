@@ -12,8 +12,8 @@ public class GaussianInterpolateMethodSolverTest {
     @Test
     public void getCoefficientsOfPolinom() {
         AbstractInterpolateMethodSolver solver =  new GaussianInterpolateMethodSolver(
-            new double[]{0.2, 0.25, -6, -5, -4},
-            new double[]{1.552, 1.6719, 1.7831, 1.8847, 1.9759,2.0563,2.125});
+            new double[]{-1, 1, -6, -5, -4},
+            new double[]{1, 2, 7, 22, 53});
        // double[] expectedParameters = {0.5,0.25,-0.125,0.0625};
         List<Variable> coefficients = solver.getCoefficientsOfPolinomByOrder();
         coefficients.forEach(System.out::println);
@@ -44,12 +44,5 @@ public class GaussianInterpolateMethodSolverTest {
 
          variables.forEach(System.out::println);
 
-        /*    Polynomial xMinuxX0DividedByHMultipleByY2 = solver
-            .getXMinuxX0DividedByHMultipleByY(5, 6);
-        List<Variable> coefficients = xMinuxX0DividedByHMultipleByY
-            .multiplyPolynomial(xMinuxX0DividedByHMultipleByY2
-                .multiplyPolynomial(solver
-                    .getXMinuxX0DividedByHMultipleByY(2,6))).getVariables();
-        coefficients.forEach(System.out::println);*/
     }
 }

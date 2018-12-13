@@ -12,16 +12,16 @@ public class KrylovMethodDisplayer implements Displayer {
     private StringBuilder matrixValuesReport = new StringBuilder();
 
 
-    public KrylovMethodDisplayer(KrylovMethodSolver solver) {
-        setMatrixValuesReport(solver);
+    public KrylovMethodDisplayer(KrylovMethodSolver solver, FaddeevLeVerrierDisplayer solver2) {
+        setMatrixValuesReport(solver,solver2);
     }
 
-    private void setMatrixValuesReport(KrylovMethodSolver solver) {
+    private void setMatrixValuesReport(KrylovMethodSolver solver, FaddeevLeVerrierDisplayer solver2) {
         addReportAboutYToStringBuilder(solver.getY());
         addSystemOfEquationsToBuilder(solver.getY(), solver.getYn());
         solver.setCoefficientsP();
         addLambdaEquationToBuilder(solver.getCoefficientsP());
-        matrixValuesReport.append(Arrays.toString(solver.getValues()));
+        matrixValuesReport.append(Arrays.toString(solver2.getRoots().toArray()));
     }
 
     private void addLambdaEquationToBuilder(double[] coefficientsP) {

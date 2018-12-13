@@ -10,6 +10,7 @@ public class Polynomial {
     private List<Variable> variables;
 
     public List<Variable> getVariables() {
+    //  variables.forEach(System.out::println);
         return variables;
     }
 
@@ -57,16 +58,18 @@ public class Polynomial {
 
     public Polynomial multiplyPolynomial(Polynomial polynomial){
       List<Variable> variables = new ArrayList<>();
+        Polynomial polynomial1 = new Polynomial();
         for (Variable x: polynomial.getVariables()){
            for (Variable x1: getVariables()){
                Variable variable = new Variable(x1);
-               variable.multipleTo(x);
-               variables.add(variable);
+               polynomial1.addVariable(variable.multipleTo(x));
+            //   variables.add(variable.multipleTo(x));
+            //   System.out.println(variable);
+              // System.out.println();
            }
         }
-        this.variables = new ArrayList<>();
-        variables.forEach(this::addVariable);
-        return this;
+     //   variables.forEach(this::addVariable);
+        return  polynomial1;
     }
 
     public  List<Double> getCoefficients(){

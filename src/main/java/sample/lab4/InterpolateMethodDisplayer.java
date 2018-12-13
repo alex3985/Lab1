@@ -11,6 +11,7 @@ import sample.lab2.Displayer;
 public class InterpolateMethodDisplayer implements Displayer {
 
     private final double[][] substractionYValuesTable;
+
     private final List<Variable> coefficientsOfPolinomByOrder;
 
     public double[][] getSubstractionYValuesTable() {

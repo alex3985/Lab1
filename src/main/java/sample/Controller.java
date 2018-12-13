@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Deque;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,7 +38,7 @@ import sample.lab4.InterpolateMethodDisplayer;
 
 public class Controller {
 
-    final int variables = 3; //number of variables which user needs to find
+    final int variables = 3; //number of variables which user needs bForLab2 find
     //Field for input data
     public TextField variableX11;
     public TextField variableX12;
@@ -64,8 +65,8 @@ public class Controller {
     //Thare will be a solution
     public TextArea SolutionAre;
     public TextArea Lab2Area;
-    public TextField from;
-    public TextField to;
+    public TextField aFroLab2;
+    public TextField bForLab2;
     public TextArea lab3TextArea;
     public TextField lab3A11;
     public TextField lab3A12;
@@ -227,8 +228,8 @@ public class Controller {
         if (DichotomyRadio.isSelected()) {
             FunctionDisplayer functionDisplayer = new FunctionDisplayer();
             IntervalDisplayer intervalDisplayer = new IntervalDisplayer();
-            Double a = Double.parseDouble(from.getText());
-            Double b = Double.parseDouble(to.getText());
+            Double a = Double.parseDouble(aFroLab2.getText());
+            Double b = Double.parseDouble(bForLab2.getText());
             DihotomyMethodSolver methodSolver =
                 new DihotomyMethodSolver(FunctionField.getText(),
                     functionDisplayer, a, b);
@@ -240,8 +241,8 @@ public class Controller {
             Function2Displayer function2Displayer = new Function2Displayer();
             CombinationMethodSolver methodSolver = new CombinationMethodSolver(
                 FunctionField.getText(),
-                function2Displayer, new FunctionInterval(Double.parseDouble(from.getText()),
-                Double.parseDouble(to.getText())));
+                function2Displayer, new FunctionInterval(Double.parseDouble(aFroLab2.getText()),
+                Double.parseDouble(bForLab2.getText())));
             methodSolver.solve();
             LinkedHashSet<Displayer> displayers = new LinkedHashSet<>();
             displayers.add(function2Displayer);
@@ -407,7 +408,7 @@ public class Controller {
         return false;
     }
 
-    //Dialog which says that user need to do
+    //Dialog which says that user need bForLab2 do
     private void Message(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning Dialog");
@@ -440,13 +441,21 @@ public class Controller {
 
             KrylovMethodSolver krylovMethodSolver = new KrylovMethodSolver(getMatrixLab3());
             KrylovMethodDisplayer krylovMethodDisplayer = new KrylovMethodDisplayer(
-                krylovMethodSolver);
+                krylovMethodSolver, displayer);
             KrylovMethodSolverVector krylovMethodSolverVector =
                 new KrylovMethodSolverVector(getMatrixLab3(),
                     krylovMethodSolver.getCoefficientsP());
+            Deque<Double> roots = displayer.getRoots();
+
+            Double[] x = new Double[roots.size()];
+            int i = 0;
+            for (Double y:roots ){
+                x[i] = y;
+                i++;
+            }
             KrylovMethodSolverVectorDisplayer vectorDisplayer =
                 new KrylovMethodSolverVectorDisplayer(krylovMethodSolverVector,
-                    krylovMethodSolver.getValues());
+                    x);
             displayers.add(krylovMethodDisplayer);
             displayers.add(vectorDisplayer);
         }
@@ -481,12 +490,12 @@ public class Controller {
         return matrixA;
     }
 
-    private double[] getXValuesOfTableInputLab4(){
+    private double[] getXValuesOfTableInputLab4() {
         return getInitialValues(lab4X1, lab4X2, lab4X3, lab4X4, lab4X5);
     }
 
-    private double[] getYValuesOfTableInputLab4(){
-        return getInitialValues(lab4Y1, lab4Y2, lab4Y3, lab4Y4,lab4Y5);
+    private double[] getYValuesOfTableInputLab4() {
+        return getInitialValues(lab4Y1, lab4Y2, lab4Y3, lab4Y4, lab4Y5);
     }
 
     private double[] getInitialValues(TextField lab41, TextField lab42, TextField lab43,
@@ -500,7 +509,7 @@ public class Controller {
         return initialY;
     }
 
-    private void setTableViewLab4(double[][] substractionYValuesTable, double[] initialX){
+    private void setTableViewLab4(double[][] substractionYValuesTable, double[] initialX) {
         lab4X1TextField.setText(String.valueOf(initialX[0]));
         lab4X2TextField.setText(String.valueOf(initialX[1]));
         lab4X3TextField.setText(String.valueOf(initialX[2]));
@@ -523,8 +532,8 @@ public class Controller {
         lab4Tria_4Y1TextField.setText(String.valueOf(substractionYValuesTable[4][0]));
     }
 
-    private void setCoefficientsLab4( List<Double> coefficientsLab4){
-       lab4ResultCoefPower0.setText(String.valueOf(coefficientsLab4.get(0)));
+    private void setCoefficientsLab4(List<Double> coefficientsLab4) {
+        lab4ResultCoefPower0.setText(String.valueOf(coefficientsLab4.get(0)));
         lab4ResultCoefPower1.setText(String.valueOf(coefficientsLab4.get(1)));
         lab4ResultCoefPower2.setText(String.valueOf(coefficientsLab4.get(2)));
         lab4ResultCoefPower3.setText(String.valueOf(coefficientsLab4.get(3)));
@@ -533,11 +542,12 @@ public class Controller {
     @FXML
     public void calculateInterpolationCoefficient(ActionEvent actionEvent) {
         GaussianInterpolateMethodSolver solver =
-            new GaussianInterpolateMethodSolver(getXValuesOfTableInputLab4(),getYValuesOfTableInputLab4());
+            new GaussianInterpolateMethodSolver(getXValuesOfTableInputLab4(),
+                getYValuesOfTableInputLab4());
         InterpolateMethodDisplayer displayer = new InterpolateMethodDisplayer(solver);
         List<Double> coefficientsOfPolinomByOrder = displayer.getCoefficientsOfPolinomByOrder();
         double[][] substractionYValuesTable = displayer.getSubstractionYValuesTable();
-        setTableViewLab4(substractionYValuesTable,getXValuesOfTableInputLab4());
+        setTableViewLab4(substractionYValuesTable, getXValuesOfTableInputLab4());
         setCoefficientsLab4(coefficientsOfPolinomByOrder);
 
     }
