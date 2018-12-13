@@ -31,7 +31,7 @@ public class KrylovMethodSolverVector {
         return res;
     }
 // метод, который исчет вектор матрицы
-    public List<Double[]> vec(double[] x) {
+    public List<Double[]> vec(Double[] x) {
         int n = coefficientsP.length;
         double[] y0 = new double[]{0, 0, 1};
 
@@ -41,7 +41,9 @@ public class KrylovMethodSolverVector {
         q[2][0] = 1;
         for (int i = 0; i < n; i++) {
             for (int j = 1; j < n; j++) {
-                q[i][j] = x[0] * q[i][j - 1] + coefficientsP[i];
+                System.out.println("q("+i+","+j+") = "+x+"("+i+") * " +"q("+i+","+j+")");
+                q[i][j] = x[i] * q[i][j - 1] + coefficientsP[i];
+
             }
         }
 

@@ -9,11 +9,11 @@ import sample.lab2.Displayer;
 public class KrylovMethodSolverVectorDisplayer implements Displayer {
     private StringBuilder matrixValuesReport = new StringBuilder();
 
-    public KrylovMethodSolverVectorDisplayer(KrylovMethodSolverVector solver,double[] x) {
+    public KrylovMethodSolverVectorDisplayer(KrylovMethodSolverVector solver,Double[] x) {
         setMatrixValuesReport(solver,x);
     }
 
-    private void setMatrixValuesReport(KrylovMethodSolverVector solver,double[] x) {
+    private void setMatrixValuesReport(KrylovMethodSolverVector solver,Double[] x) {
         List<Double[]> vec = solver.vec(x);
         addQToStringBuilder(solver);
         int j = 1;

@@ -143,7 +143,7 @@ public class GaussSeidel {
                 .append(" =")
                 .append(d)
                 .append(" \n");
-            // Update x_i to use in the next row calculation
+            // Update x_i bForLab2 use in the next row calculation
 
             X[i] = round(1 / M[i][i] * sum, 3);
 
@@ -171,7 +171,7 @@ public class GaussSeidel {
                             .append(" + ");
                     }
                 }
-                // Update x_i to use in the next row calculation
+                // Update x_i bForLab2 use in the next row calculation
 
                 X[i] = round(1 / M[i][i] * sum, 3);
                 arrayX.append("d_")

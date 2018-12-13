@@ -15,29 +15,30 @@ public class GaussianInterpolateMethodSolver extends AbstractInterpolateMethodSo
         List<Variable> coefficients;
         Polynomial polynomial = new Polynomial();
 
-        polynomial
+        List<Variable> variables = polynomial
             .addVariable(new Variable(0, tableSubstraction[0][averageIndex]))
 
             .addPolynomal(getXMinuxX0DividedByHMultipleByY(
-                tableSubstraction[1][averageIndex-1], 1))
+                tableSubstraction[1][averageIndex - 1], 1))
 
             .addPolynomal((getXMinuxX0DividedByHMultipleByY(
-                tableSubstraction[2][averageIndex-1], 2)
+                tableSubstraction[2][averageIndex - 1], 2)
                 .addVariable(new Variable(0, -1)))
                 .multiplyPolynomial(getXMinuxX0DividedByHMultipleByY(
-                    tableSubstraction[2][averageIndex-1], 2)))
+                    tableSubstraction[2][averageIndex - 1], 2)))
 
             .addPolynomal
                 (getXMinuxX0DividedByHMultipleByY(tableSubstraction[3][averageIndex - 2], 6)
                     .addVariable(new Variable(0, 1))
                     .multiplyPolynomial(getXMinuxX0DividedByHMultipleByY
-                        (tableSubstraction[3][averageIndex - 1], 6)
+                        (tableSubstraction[3][averageIndex - 2], 6)
                         .addVariable(new Variable(0, -1)))
                     .multiplyPolynomial(
                         getXMinuxX0DividedByHMultipleByY(tableSubstraction[3][averageIndex - 2],
-                            6)));
+                            6))).getVariables();
+
         coefficients = polynomial.getVariables();
-        return coefficients;
+        return variables;
     }
 
 

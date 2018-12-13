@@ -24,8 +24,6 @@ public class Variable {
     public Variable addTo(Variable variable){
         if (variable.getPower() == this.getPower())
         this.coefficient = variable.getCoefficient() + this.coefficient;
-        else
-            throw new IllegalArgumentException("Wrong power of variable");
         return this;
     }
 
