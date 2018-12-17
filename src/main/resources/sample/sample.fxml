@@ -315,7 +315,7 @@
                               <TextField fx:id="lab4Y5" layoutX="225.0" layoutY="54.0" prefHeight="25.0" prefWidth="38.0" />
                               <Label layoutX="31.0" layoutY="33.0" text="X" />
                               <Label layoutX="32.0" layoutY="58.0" text="Y" />
-                              <Button onAction = "#calculateInterpolationCoefficient" fx:id="lab4Solve" layoutX="142.0" layoutY="95.0" mnemonicParsing="false" text="Solve" />
+                              <Button fx:id="lab4Solve" layoutX="142.0" layoutY="95.0" mnemonicParsing="false" onAction="#calculateInterpolationCoefficient" text="Solve" />
                               <Label layoutX="21.0" layoutY="132.0" text="i" />
                               <Label layoutX="57.0" layoutY="132.0" text="xi" />
                               <Label layoutX="102.0" layoutY="132.0" text="yi" />
@@ -376,6 +376,29 @@
                   </SplitPane>
                </content>
             </Tab>
+            <Tab text="lab5">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="y0TextField" layoutX="53.0" layoutY="43.0" prefHeight="26.0" prefWidth="61.0" />
+                        <TextField layoutX="166.0" layoutY="43.0" prefHeight="26.0" prefWidth="55.0" fx:id="x0TextField" />
+                       <TextField fx:id="bTextField" layoutX="278.0" layoutY="99.0" prefHeight="26.0" prefWidth="55.0" />
+                        <TextField fx:id="hTextField" layoutX="278.0" layoutY="43.0" prefHeight="26.0" prefWidth="55.0" />
+                        <Label layoutX="14.0" layoutY="48.0" text="y0" />
+                        <Label layoutX="142.0" layoutY="48.0" text="x0" />
+                        <Label layoutX="242.0" layoutY="48.0" text="h" />
+                       <Label layoutX="247.0" layoutY="104.0" text="b" />
+                        <TextArea fx:id="textResultAreaLab5" layoutX="412.0" layoutY="1.0" prefHeight="417.0" prefWidth="365.0" />
+                        <Button fx:id="solveDiffeerntialEquationButton" layoutX="142.0" layoutY="140.0" mnemonicParsing="false" onAction="#solveDifferentialEquation" text="solve" />
+                        <RadioButton fx:id="picardRadioButton" layoutX="62.0" layoutY="103.0" mnemonicParsing="false" text="Picard">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="lab5" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="adamsRadioButton" layoutX="159.0" layoutY="104.0" mnemonicParsing="false" text="Adams" toggleGroup="$lab5" />
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
       </tabs>
     </TabPane>
     <MenuBar>
