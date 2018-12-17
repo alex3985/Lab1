@@ -41,6 +41,7 @@ import sample.lab3.KrylovMethodSolverVector;
 import sample.lab3.KrylovMethodSolverVectorDisplayer;
 import sample.lab4.GaussianInterpolateMethodSolver;
 import sample.lab4.InterpolateMethodDisplayer;
+import sample.lab5.Adams;
 import sample.lab5.PicardDisplayer;
 import sample.lab5.TypeOfPicardDifferentialEquationSolver;
 
@@ -584,7 +585,7 @@ public class Controller {
             displayers.add(displayer);
             }
             else{
-
+            textResultAreaLab5.setText(new Adams(h,b,y0,x0).solve());
         }
         display(displayers,textResultAreaLab5);
 
