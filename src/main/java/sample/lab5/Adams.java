@@ -61,27 +61,27 @@ public class Adams {
         builder.append("----------------------\n");
         for (int i = 0; i < arrayQ1.length; i++) {
             arrayQ1[i] = arrayQ[i + 1] - arrayQ[i];
-            builder.append("\u03bbq" + (i) + "= " + arrayQ[i]+"\n");
+            builder.append("\u25B3q" + (i) + "= " + arrayQ[i]+"\n");
             System.err.println("q1= " + arrayQ1[i]);
         }
         System.err.println("-----------");
         builder.append("----------------------\n");
         for (int i = 0; i < arrayQ2.length; i++) {
             arrayQ2[i] = arrayQ1[i + 1] - arrayQ1[i];
-            builder.append("\u03bb^2q" + (i) + "= " + arrayQ[i]+"\n");
+            builder.append("\u25B3^2q" + (i) + "= " + arrayQ[i]+"\n");
             System.err.println("q2= " + arrayQ2[i]);
         }
         System.err.println("-----------");
         builder.append("----------------------\n");
         for (int i = 0; i < arrayQ3.length; i++) {
             arrayQ3[i] = arrayQ2[i + 1] - arrayQ2[i];
-            builder.append("\u03bb^3q" + (i) + "= " + arrayQ[i]+"\n");
+            builder.append("\u25B3^3q" + (i) + "= " + arrayQ[i]+"\n");
             System.err.println("q3= " + arrayQ3[i]);
         }
         System.err.println("-----------");
         builder.append("----------------------\n");
         Q4 = arrayQ3[1] - arrayQ3[0];
-        builder.append("\u03bb^4q" + (0) + "= " + Q4+"\n");
+        builder.append("\u25B3^4q" + (0) + "= " + Q4+"\n");
         System.err.println("q4= " + Q4);
         builder.append("----------------------\n");
     }
@@ -89,7 +89,7 @@ public class Adams {
     public String solve() {
         this.findAllQ();
         double d = arrayY[SIZE] + arrayQ[SIZE] + 0.5 * arrayQ1[SIZE - 1] + 5.0 / 12.0 * arrayQ2[SIZE - 2] + 3.0 / 8.0 * arrayQ3[SIZE - 3] + 251.0 / 720.0 * Q4;
-        builder.append("y = y4 + q4 + (1/2)\u03bbq3 + \u03bb^2q2 + \u03bb^3q1 + \u03bb^4q0 = " + d);
+        builder.append("y = y4 + q4 + (1/2)\u25B3q3 + \u25B3^2q2 + \u25B3^3q1 + \u25B3^4q0 = " + d);
         System.err.println("d= " + d);
         return builder.toString();
     }

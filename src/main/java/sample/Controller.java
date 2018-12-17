@@ -585,7 +585,14 @@ public class Controller {
             displayers.add(displayer);
             }
             else{
-            textResultAreaLab5.setText(new Adams(h,b,y0,x0).solve());
+            Adams adams = new Adams(h,b,y0,x0);
+            System.err.println(adams.solve());
+            displayers.add(new Displayer() {
+                @Override
+                public String display() {
+                    return adams.solve();
+                }
+            });
         }
         display(displayers,textResultAreaLab5);
 
